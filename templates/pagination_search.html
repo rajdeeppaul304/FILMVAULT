@@ -1,6 +1,7 @@
 <div class="pagination">
+    <div >
     {% if page_no > 1 %}
-        <a class="prev" href="{{ url_for('search', search_input=search_input, page_no=page_no-1) }}">prev</a>
+        <a class="prev" href="{{ url_for('search', search_input=search_input, page_no=page_no-1) }}">&larr;</a>
     {% endif %}
 
     {% if page_no > 5 %}
@@ -24,10 +25,10 @@
     {% endif %}
 
     {% if page_no < total_pages %}
-        <a class="next" href="{{ url_for('search', search_input=search_input, page_no=page_no+1) }}">next</a>
+        <a class="next" href="{{ url_for('search', search_input=search_input, page_no=page_no+1) }}">&rarr;</a>
     {% endif %}
 
-
+</div>
   <div class="jumpToPage">
     <label for="jump-to-page">Jump to Page:</label>
     <input type="number" class="jump-to-page" name="page_no" min="1" max="{{ total_pages }}" value="{{ page_no }}">

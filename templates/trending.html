@@ -131,15 +131,20 @@
   .pagination{
     display:flex;
   }
+  .pagination > div{
+    display:flex;
+  }
   .pagination>*{
     margin: 0px 4px;
 
 
   }
 
-  .pagination > a,span{
+  .pagination > div >  a,span{
     display: flex;
     border-radius: 0.3em;
+    margin: 0px 4px;
+
 
 
     /* text-align: center; */
@@ -149,7 +154,7 @@
     width: 2.2em;
   }
 
-  .pagination > a{
+  .pagination > div >  a{
     display: flex;
 
     background-color: bisque;
@@ -166,7 +171,7 @@
     text-decoration: none; /* Optional: Remove underline */
 
   }
-  .pagination > a:hover{
+  .pagination > div >  a:hover{
     color: bisque;
     background-color:red;
     transform:scale(1.15);
@@ -209,6 +214,57 @@
       width: 50px
     }
 
+
+    @media (max-width:480px) {
+      #timeperiod{
+        display: flex;
+        justify-content: center;
+      }
+
+
+      .pagination{
+    display:block;
+  }
+
+  .pagination > div {
+    justify-content: center;
+
+  }
+
+  
+  .pagination > div >  a,span{
+    font-size: 8px;
+    padding: 2px;
+
+  }
+
+  .pagination > div > a, span {
+    width: 1.6em;
+  }
+  .jumpToPage{
+    margin-top : 4px;
+    font-size: 8px;
+    height: 16px;
+  }
+  .jump-to-page{
+    width: 25px;
+  }
+  .jumpToPage>label{
+    font-size: 10px;
+margin: auto 4px ;
+text-align: center;
+  }
+
+  .second-pagination{
+    width: 100%;
+    overflow: hidden;
+  }
+  .jump-button{
+    height: 16px;
+    font-size: 10px;
+
+  }
+    }
 
 
 </style>

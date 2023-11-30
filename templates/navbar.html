@@ -117,16 +117,32 @@
 
 
 
-
-
-
-
-
-
       #autocompleteResults {
   display: none;
   /* Add other styles as needed */
 }
+
+
+  @media (max-width:480px) {
+      #navbar > div > img{
+        display: none;
+      }
+
+      #navbar > img{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 5%;
+      }
+
+      #search{
+        width: 70%;
+        right: 15%;
+      }
+  }
+
+
+
 
   </style>
 
@@ -142,7 +158,7 @@
       </div>
         <div id="autocompleteResults"></div>
       </div>
-      <a href="{{ url_for('trending', timeperiod='day', page_no=1) }}" style="text-decoration: none; color: white;margin: 0;"><p style="margin: 0;margin-bottom: 8px;">trending</p></a>
+      <a href="{{ url_for('trending', timeperiod='day', page_no=1) }}" style="text-decoration: none; color: white;margin: 0;"><p style="margin: 0;margin-bottom: 8px;">Trending</p></a>
       <img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
 
 </div>
@@ -153,12 +169,6 @@ function handleClick(){
   window.open("{{ url_for('index')}}");
 
 }
-
-
-
-
-
-
 
 
   const movieSearch = document.getElementById('movieSearch');
@@ -200,7 +210,8 @@ function handleClick(){
   });
   
   </script>
-  
+  <script src="{{url_for('static', filename='scripts/script.js')}}"></script>
+
 
 <script>
     // script.js
@@ -246,42 +257,6 @@ function handleClick(){
       searchButton.addEventListener('click', search_movie);
 
 
-    function generateStarRating(contForStar, rating) {
-        const container = contForStar;
-        container.innerHTML = '';
-
-        // Ensure the rating is within the valid range (1 to 10)
-        rating = Math.max(1, Math.min(10, rating));
-
-        // Calculate the number of full stars, half star, and empty stars
-        const fullStars = Math.floor(rating / 2);
-        const hasHalfStar = rating % 2 !== 0;
-
-        // Create full stars
-        for (let i = 0; i < fullStars; i++) {
-        const star = document.createElement('span');
-        star.className = 'fa fa-star checked';
-        container.appendChild(star);
-        }
-
-        // Create half star if needed
-        if (hasHalfStar) {
-        const halfStar = document.createElement('span');
-        halfStar.className = 'fa fa-star-half-o checked';
-        container.appendChild(halfStar);
-        }
-
-        // Create empty stars
-        const emptyStars = 5 - Math.ceil(rating / 2);
-        for (let i = 0; i < emptyStars; i++) {
-        const star = document.createElement('span');
-        star.className = 'fa fa-star-o checked' ;
-        container.appendChild(star);
-        }
-    }
-
-  // Example: Call the function with a rating (between 1 to 10)
-//   generateStarRating(7);
 
 
       function handleInput() {

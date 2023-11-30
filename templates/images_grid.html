@@ -1,5 +1,7 @@
 
 <style>
+
+
     #images-grid-main>div>div>div>div{
         overflow: hidden;
         border-radius: 1em;
@@ -43,6 +45,7 @@
    
 
     #images-grid-main img{
+        /* width: 120px; */
         border-top-left-radius: 1em;
   border-top-right-radius: 1em;
   transition: transform 0.3s ease-in-out;
@@ -56,7 +59,69 @@
 
     }
 
+@media (max-width:480px) {
+    *{
+        font-size: 14px;
+        /* transform:scale(1.15); */
+    }
 
+    
+    #images-grid-main img{
+        width: 100%;
+
+
+    }
+
+    #images-grid-main>div>div>div>a>p:hover{
+        font-size: 16px;
+
+
+    }
+
+    #images-grid-main>div>div>div>a>p{
+        font-size: 14px;
+        padding: 0px 4px;
+        text-decoration: none;
+        color: black;
+        transition: font 0.3s ease-in-out;
+        width:120px;
+        word-wrap: break-word;
+        overflow: hidden;
+
+
+    }
+    #time-pagination{
+        display: block;
+        width: 100%;
+    }
+
+    .pagination{
+    display:block;
+  }
+
+    #second-pagination{
+        display: block;
+    }
+
+    #images-grid-main>div>div>div>div {
+        width: 100%;
+    }
+
+    .col-xs-6.col-md-3{
+        width: 50%;
+    }
+    #images-grid-main>div>div>div>div>div{
+        display: block;
+    }
+
+    #left-content{
+        width: 100%;
+    }
+
+    #right-content{
+        display: none;
+    }
+}
 
 </style>
 
@@ -69,7 +134,7 @@
         {% for chunk in images|batch(4) %}
             <div class="row mb-4">
                 {% for image in chunk %}
-                    <div class="col-sm-3">
+                    <div class="col-xs-6 col-md-3">
                         <div>
                             <a href="{{ url_for('movie_page', idm=image[2]) }}" target="_blank">
                                 <img src="{{ image[0] }}" alt="Movie Image">
@@ -77,7 +142,7 @@
                             <div>
                                 
                                 <!-- Append the movie's index or ID to the identifier -->
-                                <p class="vote-average" id="vote_average_{{ image[2] }}">{{ image[3] }}</p>
+                                <p class="vote-average" id="vote_average_{{ image[2] }}"><i style="margin-right: 5px;" class='fa fa-star checked'></i>{{ image[3] }}</p>
                                 <p class="date" >{{ image[4] }}</p>
 
                             </div>
@@ -89,71 +154,13 @@
         {% endfor %}
     </div>
 </div>
+<script src="{{url_for('static', filename='scripts/script.js')}}"></script>
+
 
 <script>
-function generateStarRating(contForStar, rating) {
-    const container = contForStar;
-    container.innerHTML = '';
-
-    // Ensure the rating is within the valid range (1 to 10)
-    rating = Math.max(1, Math.min(10, rating));
-
-    // Calculate the number of full stars, half star, and empty stars
-    const fullStars = Math.floor(rating / 2);
-    const hasHalfStar = rating % 2 !== 0;
-
-    // Create full stars
-    for (let i = 0; i < fullStars; i++) {
-        const star = document.createElement('span');
-        star.className = 'fa fa-star checked';
-        container.appendChild(star);
-    }
-
-    // Create half star if needed
-    if (hasHalfStar) {
-        const halfStar = document.createElement('span');
-        halfStar.className = 'fa fa-star-half-o checked';
-        container.appendChild(halfStar);
-    }
-
-    // Create empty stars
-    const emptyStars = 5 - Math.ceil(rating / 2);
-    for (let i = 0; i < emptyStars; i++) {
-        const star = document.createElement('span');
-        star.className = 'fa fa-star-o checked';
-        container.appendChild(star);
-    }
-
-    // Adjust the spacing between stars
-    const allStars = container.querySelectorAll('span');
-    allStars.forEach(star => {
-        star.style.fontSize = '16px';  // Set the font size to the desired value
-        star.style.marginRight = '2px';  // Set the margin to control the spacing
-    });
-}
-
     document.addEventListener("DOMContentLoaded", function () {
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if (window.innerWidth > 480) {
         // Get all elements with class "vote-average"
         const voteAverageElements = document.querySelectorAll(".vote-average");
 
@@ -162,21 +169,8 @@ function generateStarRating(contForStar, rating) {
             const movieId = element.id.split("_")[1]; // Extract movie ID from the element ID
             const rating = parseFloat(element.innerText); // Extract rating from the element text
             generateStarRating(element, rating);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        });
+    }
     });
 
 
