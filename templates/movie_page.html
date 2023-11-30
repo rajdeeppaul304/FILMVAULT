@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{title_movie}} - FilmVault</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -249,12 +251,12 @@
 
     <script>
         function handleImageError() {
-    var fallbackImage = "https://image.tmdb.org/t/p/original/nMKdUUepR0i5zn0y1T4CsSB5chy.jpg";
+    // var fallbackImage = "https://image.tmdb.org/t/p/original/nMKdUUepR0i5zn0y1T4CsSB5chy.jpg";
     document.getElementById("backdrop_image").src = fallbackImage;
 }
 
 function handlePosterError() {
-    var fallbackImage = "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg";
+    var fallbackImage = "{{url_for('static', filename='images/no_image.png')}}";
     document.getElementById("poster_image").src = fallbackImage;
 }
 

@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>FilmVault</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -131,7 +133,6 @@
         margin: 0;
         text-align: left;
         height: 50%;
-      }
 
 
 
@@ -380,6 +381,14 @@ movieSearch.addEventListener('blur', () => {
 
       const searchButton = document.getElementById('search-button');
       const searchInput = document.getElementById('movieSearch');
+
+      searchInput.addEventListener("keydown", function(event) {
+    // Check if the pressed key is Enter (key code 13)
+    if (event.keyCode === 13) {
+        // Get the value entered in the input field
+        search_movie()
+    }
+});
 
       searchInput.addEventListener('input', debounce(handleInput, 500));
 

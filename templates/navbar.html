@@ -1,3 +1,4 @@
+
 <style>
   #search {
       position:absolute;
@@ -163,6 +164,28 @@ function handleClick(){
   const movieSearch = document.getElementById('movieSearch');
   const autocompleteResults = document.getElementById('autocompleteResults');
   
+  movieSearch.addEventListener("keydown", function(event) {
+    // Check if the pressed key is Enter (key code 13)
+    if (event.keyCode === 13) {
+        // Get the value entered in the input field
+        const query = movieSearch.value.trim();
+          var url = `{{ url_for('search', search_input='__search_input__', page_no=1) }}`;
+                    // Replace '__page_no__' with the actual page number
+                    url = url.replace('__search_input__', query);
+                    window.location.href = url;
+
+        // Navigate to the link based on the entered value (replace with your actual link)
+    }
+});
+
+
+
+
+
+
+
+
+
   movieSearch.addEventListener('focus', () => {
     autocompleteResults.style.transition = 'opacity 0.3s ease-in-out';
     autocompleteResults.style.opacity = '1'; // Set opacity to fully visible

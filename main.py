@@ -143,7 +143,7 @@ def movie_page(idm):
     else:
         images_data = funcForBackdropPath(data)
         # print(images_data, image_pre)
-        return render_template('movie_page.html', images_data=data, genres=dict_genre['genres'])
+        return render_template('movie_page.html', images_data=data, genres=dict_genre['genres'], title_movie = data['title'])
 
 
 if __name__ == '__main__':
