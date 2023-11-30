@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+        const genres = {{ genres | tojson | safe }};
+  
+  </script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: grey;
+        }
+        * {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+.checked {
+        color: orange;
+        display: inline;
+      }
+
+        #navbar{
+            width: 100%;
+            height: 15%;
+            background-color: black;
+            display: flex;
+            color: white;
+            
+        }
+
+        #navbar > img{
+            height: 100%;
+        }
+        #navbar > div{
+            display: flex;
+            justify-content:flex-end;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        #navbar > div > *{
+
+            margin: 0px 10px ;
+        }
+
+
+        #navbar > div > img{
+            height: 100%;
+        }
+
+
+
+    </style>
+
+  <style>
+    #main{
+            width: 100%;
+            /* height: 85%; */
+            display: flex;
+        }
+
+    #left-content{
+            width: 80%;
+            /* background-color: green; */
+            /* height: 100%; */
+        }
+
+
+    #left-content img{
+        width: 100%;
+    }
+    #right-content{
+        width: 20%;
+        height: 100%;
+        /* background-color: aqua; */
+        z-index: 100;
+    }
+
+    #right-content .container div{
+        border-radius: 5px;
+        margin: 5px 0;
+        width: 100%;
+        height: 80px;
+        background-color: bisque;
+        overflow: hidden;
+    }
+    #right-content .container div > img{
+        /* width: 100%; */
+        height: 100%;
+        background-color: bisque;
+    }
+
+  </style>
+
+<style>
+    #time-pagination{
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+  
+    }
+    .pagination{
+
+      display:flex;
+      justify-content: right;
+      margin-right: 1.8em;
+    }
+    .pagination>*{
+      margin: 10px 4px;
+  
+  
+    }
+  
+    .pagination > a,span{
+      display: flex;
+      border-radius: 0.3em;
+  
+  
+      /* text-align: center; */
+      align-items: center;
+      justify-content:center;
+      height: 2em;
+      width: 2.2em;
+    }
+  
+    .pagination > a{
+      display: flex;
+  
+      background-color: bisque;
+      /* text-align: center; */
+      align-items: center;
+      justify-content:center;
+      height: 2em;
+      width: 2.2em;
+  
+      color: red;
+  
+      transition: transform 0.3s ease-in-out;
+  
+      text-decoration: none; /* Optional: Remove underline */
+  
+    }
+    .pagination > a:hover{
+      color: bisque;
+      background-color:red;
+      transform:scale(1.15);
+  
+  
+      }
+  
+    .prev,.next {
+      width: 3.5em !important;
+  
+    }
+  
+    .current-page{
+      background-color: red;
+      color: bisque;
+  
+    }
+  .jump-button{
+    width: 3em;
+    color: red;
+    background-color: bisque;
+    border: 0;
+    border-radius: 0.3em;
+    height: 2em;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 1em;
+  
+  }
+  
+  
+  .jump-button:hover{
+      color: bisque;
+      background-color:red;
+      transform:scale(1.15);
+  
+  
+      }
+  
+      .jump-to-page{
+        width: 50px
+      }
+  
+  
+  
+  </style>
+</head>
+<body>
+
+    <div id="navbar">
+        {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock navbar %}
+    
+    </div>
+
+    </div>
+
+    <div id="main">
+        <div id="left-content">
+            {% block pagination_search %}
+            {% include 'pagination_search.html' %}
+        {% endblock %}
+
+
+
+            {% block images_grid %}
+        {% include 'images_grid.html' %}
+    {% endblock %}
+
+
+        </div>
+        {% block right_content %}
+        {% include 'right_content.html' %}
+    {% endblock %}
+
+    </div>
+    <style>
+        #second-pagination{
+          display: flex;
+          justify-content: center;
+        }
+      </style>
+    <div id="second-pagination">
+
+        {% block pagination_trending2 %}
+        {% include 'pagination_trending.html' %}
+    {% endblock %}
+    
+    </div>
+    
+
+    
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
+    <!-- <div id="pagination">
+        {% if page_no > 1 %}
+            <a href="{{ url_for('search', search_input=search_input, page_no=page_no-1) }}">prev</a>
+        {% endif %}
+    
+        {% if page_no > 5 %}
+            <a href="{{ url_for('search', search_input=search_input, page_no=1) }}">1</a>
+            <span>...</span>
+        {% endif %}
+    
+        {% for page in range(1, page_no+3) %}
+            {% if page_no - 2 <= page <= total_pages %}
+                {% if page == page_no %}
+                    <span>{{ page }}</span>
+                {% else %}
+                    <a href="{{ url_for('search', search_input=search_input, page_no=page) }}">{{ page }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    
+        {% if page_no < total_pages - 4 %}
+            <span>...</span>
+            <a href="{{ url_for('search', search_input=search_input, page_no=total_pages) }}">{{ total_pages }}</a>
+        {% endif %}
+    
+        {% if page_no < total_pages %}
+            <a href="{{ url_for('search', search_input=search_input, page_no=page_no+1) }}">next</a>
+        {% endif %}
+    
+  
+      <div id="jumpToPage">
+        <label for="jump-to-page">Jump to Page:</label>
+        <input type="number" id="jump-to-page" name="page_no" min="1" max="{{ total_pages }}" value="{{ page_no }}">
+        <button type="button" id="jump-button">Go</button>
+      </div> -->
+  
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              // Get the form and input field
+              // var form = document.getElementById("jump-to-page-form");
+              var linkedInputs = document.getElementsByClassName("jump-to-page");
+
+// Add input event listeners to all linked inputs
+for (var i = 0; i < linkedInputs.length; i++) {
+  linkedInputs[i].addEventListener("input", function () {
+    // Update the value of all other linked inputs
+    for (var j = 0; j < linkedInputs.length; j++) {
+      if (linkedInputs[j] !== this) {
+        linkedInputs[j].value = this.value;
+      }
+    }
+  });
+}
+
+
+
+          var inputField = linkedInputs[0];
+
+          // Function to submit the form when the button is clicked or Enter is pressed
+          function jumpToPage() {
+            console.log("correct")
+            var page = inputField.value;
+          console.log(page);
+          var url = `{{ url_for('search', search_input=search_input, page_no='__page_no__') }}`;
+          // Replace '__page_no__' with the actual page number
+          url = url.replace('__page_no__', page);
+          console.log(url);
+
+          window.location.href = url;
+          }
+
+
+          // Attach the function to the button click event
+          var jumpButtons = document.getElementsByClassName("jump-button");
+
+          // document.getElementById("jump-button").addEventListener("click", jumpToPage);
+
+          for (var i = 0; i < jumpButtons.length; i++) {
+            jumpButtons[i].addEventListener("click", jumpToPage);
+          }
+
+
+          // Attach the function to the Enter key press event on the input field
+          inputField.addEventListener("keyup", function(event) {
+              if (event.key === "Enter") {
+                  jumpToPage();
+              }
+          });
+        });
+      </script>
+    </div>
+  
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

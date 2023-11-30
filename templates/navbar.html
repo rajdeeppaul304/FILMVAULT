@@ -1,0 +1,384 @@
+<style>
+  #search {
+      position:absolute;
+      top: 5%;
+      right: 30%;
+      z-index: 1000;
+    margin: 0px 40%;
+    width: 30%;
+    background-color: transparent;
+  }
+  #movieSearch{
+    width: 90%;
+  }
+  #autocompleteResults{
+    width: 92%;
+    background-color: #000;
+    /* mar-right: 400px; */
+  }
+
+  #autocompleteResults > div {
+    display: flex;
+    background-color: white;
+    color: black;
+    width: 100%;
+    
+    margin-top: 10px;
+  }
+
+  #autocompleteResults > div > img {
+    background-color: white;
+    color: black;
+    height: 65px;
+    margin-bottom: 10px;
+  }
+
+  #autocompleteResults > div > p {
+    float: right;
+  }
+</style>
+
+  <style>
+          #search {
+        margin: 0px auto;
+        width: 40%;
+        /* position: relative; */
+        /* left: auto; */
+        text-align: center;
+        justify-content: center;
+      }
+      #autocompleteResults{
+        padding: 0 1.5em;
+      }
+
+      #autocompleteResults > div {
+        display: flex;
+        background-color: bisque;
+        color: black;
+        width: 100%;
+        height: 5em;
+        margin-top: 10px;
+
+        white-space: nowrap; /* Prevent text from wrapping to the next line */
+  overflow: hidden; /* Hide the overflowed content */
+  text-overflow: ellipsis; /* Display an ellipsis (...) for the hidden text */
+
+        border-radius: 0.375em;
+        cursor: pointer;
+      }
+
+      #autocompleteResults > div > img {
+        background-color: bisque;
+        color: black;
+        height: 100%;
+        /* margin-bottom: 10px; */
+      }
+
+
+      #autocompleteResults > div >div {
+        padding-left: 2px;
+
+      }
+
+      #autocompleteResults > div >div>div {
+        display: flex;
+        /* background-color: red; */
+        padding-left: 10px;
+        padding-top: 2px;
+        font-size: 0.73em;
+
+
+      }
+
+
+
+
+#autocompleteResults > div > div > div > div:not(:last-child)::after {
+  content: '|';
+  margin-left: 0.5em; 
+  margin-right: 0.5em; 
+
+  color: #000; /* Set the color of the bar */
+}
+
+
+
+      #autocompleteResults > div >div > p {
+        margin: 0;
+        text-align: left;
+        height: 50%;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      #autocompleteResults {
+  display: none;
+  /* Add other styles as needed */
+}
+
+  </style>
+
+
+
+<img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+<div>
+    <div id="search">
+      <div style="display: flex; height: 30px;">
+        <input style="border: none; color: #fff; background-color: #000; border-bottom: 2px solid #fff; outline: none;" type="text" id="movieSearch" placeholder="Search Movie..." />
+        <!-- <input id="search-button" type="button" value="search" /> -->
+        <p id="search-button" style="margin-left: 4px; margin-top: 3px;"><i class="fa fa-search" style="font-size:22px"></i></p>
+      </div>
+        <div id="autocompleteResults"></div>
+      </div>
+<p>favorite</p>
+<p>trending</p>
+<img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+</div>
+<script>
+  const movieSearch = document.getElementById('movieSearch');
+  const autocompleteResults = document.getElementById('autocompleteResults');
+  
+  movieSearch.addEventListener('focus', () => {
+    autocompleteResults.style.transition = 'opacity 0.3s ease-in-out';
+    autocompleteResults.style.opacity = '1'; // Set opacity to fully visible
+    autocompleteResults.style.display = 'block';
+  });
+  
+  movieSearch.addEventListener('blur', () => {
+    autocompleteResults.style.opacity = '0'; // Set opacity to fully transparent
+    setTimeout(() => {
+      autocompleteResults.style.display = 'none';
+    }, 300); // Adjust the timeout to match the transition duration
+  });
+  
+  </script>
+  
+
+<script>
+    // script.js
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWRiZTA3OTE5NGI4NWYzYzk4MDkwN2Q2YzFjYjc2ZSIsInN1YiI6IjY1NjYyYTcyODlkOTdmMDBhYjE1ZWUzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HkrlRy6Ny7G9uwCzFuYrSW7V7GGEslMEL6W0TA6dyjE'
+      }
+    };
+
+    const searchButton = document.getElementById('search-button');
+    const searchInput = document.getElementById('movieSearch');
+    // const autocompleteResults = document.getElementById('autocompleteResults');
+
+    searchInput.addEventListener('input', debounce(handleInput, 500));
+
+    searchButton.addEventListener('click', search_movie);
+
+
+              // }
+
+// Load images on page load or when needed
+              // loadImages();
+
+          //   img_for_poster.src = backdrop_path_url
+
+          //   function handleImageError() {
+
+          //       img_for_poster.src = poster_path_url;
+
+          //   }
+
+
+
+          //   img_for_poster.onerror = handleImageError
+
+      // script.js
+
+
+      searchInput.addEventListener('input', debounce(handleInput, 500));
+
+      searchButton.addEventListener('click', search_movie);
+
+
+    function generateStarRating(contForStar, rating) {
+        const container = contForStar;
+        container.innerHTML = '';
+
+        // Ensure the rating is within the valid range (1 to 10)
+        rating = Math.max(1, Math.min(10, rating));
+
+        // Calculate the number of full stars, half star, and empty stars
+        const fullStars = Math.floor(rating / 2);
+        const hasHalfStar = rating % 2 !== 0;
+
+        // Create full stars
+        for (let i = 0; i < fullStars; i++) {
+        const star = document.createElement('span');
+        star.className = 'fa fa-star checked';
+        container.appendChild(star);
+        }
+
+        // Create half star if needed
+        if (hasHalfStar) {
+        const halfStar = document.createElement('span');
+        halfStar.className = 'fa fa-star-half-o checked';
+        container.appendChild(halfStar);
+        }
+
+        // Create empty stars
+        const emptyStars = 5 - Math.ceil(rating / 2);
+        for (let i = 0; i < emptyStars; i++) {
+        const star = document.createElement('span');
+        star.className = 'fa fa-star-o checked' ;
+        container.appendChild(star);
+        }
+    }
+
+  // Example: Call the function with a rating (between 1 to 10)
+//   generateStarRating(7);
+
+
+      function handleInput() {
+          const query = searchInput.value.trim();
+
+          if (query.length === 0) {
+              autocompleteResults.innerHTML = '';
+              return;
+          }
+
+          const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+
+          fetch(url, options)
+              .then(response => response.json())
+              .then(data => displayResults(data.results))
+              .catch(error => console.error(error));
+      }
+
+      function displayResults(results) {
+          autocompleteResults.innerHTML = '';
+
+          // Limit the loop to 10 items or the length of results if it's less than 10
+          const limit = Math.min(results.length, 5);
+
+          for (let i = 0; i < limit; i++) {
+              const movie = results[i];
+
+              const listItem = document.createElement('div');
+                  const img_for_poster = document.createElement('img');
+                  const div_beside_image = document.createElement('div');
+                    const para_for_title = document.createElement('p');
+                    const info_movie = document.createElement('div');
+                        const info_movie_rating = document.createElement('div');
+                        const info_movie_genre = document.createElement('div');
+                        const info_movie_releasedate = document.createElement('div');
+
+                  const backdrop_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.backdrop_path;
+                  const poster_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.poster_path;
+                  const error_image_url = `{{ url_for('static', filename='images/no_image.png') }}`;
+
+
+            
+                //   function loadImages() {
+                    img_for_poster.src = backdrop_path_url;
+                    img_for_poster.onerror = function() {
+                        // First image failed, try the second one
+                        img_for_poster.src = poster_path_url;
+                        img_for_poster.onerror = function() {
+                            // Both images failed, use the first default image
+                            img_for_poster.src = error_image_url;
+                        };
+                    };
+                // }
+
+// Load images on page load or when needed
+                // loadImages();
+
+            //   img_for_poster.src = backdrop_path_url
+
+            //   function handleImageError() {
+
+            //       img_for_poster.src = poster_path_url;
+
+            //   }
+
+
+
+            //   img_for_poster.onerror = handleImageError
+            function getFirstThreeGenres(genreIds, genreDict) {
+            const firstThreeGenreIds = genreIds.slice(0, 3); // Get the first three genre IDs
+            const firstThreeGenres = firstThreeGenreIds.map(id => {
+                const genre = genreDict.find(item => item.id === id);
+                return genre ? genre.name : '';
+            });
+            return firstThreeGenres.join(', ');
+            }
+
+                console.log(movie)
+            // Display the runtime in the desired format
+            // info_movie_runtime.textContent = `${hours}h ${minutes}m`;
+
+              para_for_title.textContent = movie.title;
+              info_movie_releasedate.textContent = movie.release_date ;
+              info_movie_genre.textContent = getFirstThreeGenres(movie.genre_ids, genres);
+
+              generateStarRating(info_movie_rating, movie.vote_average);
+
+              listItem.addEventListener('click', () => {
+                  searchInput.value = movie.title;
+                  id_for_movie = movie.id;
+                  // search_input
+                  var url = `{{ url_for('movie_page', idm='__id_for_movie__') }}`;
+                    // Replace '__page_no__' with the actual page number
+                    url = url.replace('__id_for_movie__', id_for_movie);
+                    window.open( url, '_blank');
+
+                  //   window.location.href = url
+
+                  autocompleteResults.innerHTML = '';
+              });
+
+              info_movie.appendChild(info_movie_rating)
+              info_movie.appendChild(info_movie_releasedate)
+              info_movie.appendChild(info_movie_genre)
+
+
+              div_beside_image.appendChild(para_for_title)
+              div_beside_image.appendChild(info_movie)
+
+              listItem.appendChild(img_for_poster)
+              listItem.appendChild(div_beside_image)
+              
+
+              autocompleteResults.appendChild(listItem);
+          }
+      }
+
+
+
+      function search_movie(){
+          const query = searchInput.value.trim();
+          var url = `{{ url_for('search', search_input='__search_input__', page_no=1) }}`;
+                    // Replace '__page_no__' with the actual page number
+                    url = url.replace('__search_input__', query);
+                    window.location.href = url;
+      }
+      // Utility function to debounce input event
+      function debounce(fn, delay) {
+          let timeoutId;
+          return function () {
+              clearTimeout(timeoutId);
+              timeoutId = setTimeout(() => {
+                  fn.apply(this, arguments);
+              }, delay);
+          };
+      }
+    </script>

@@ -1,0 +1,35 @@
+<!-- layout.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Add any common styles or scripts here -->
+</head>
+<body>
+
+<div id="right-content">
+    <div class="container">
+        Top rated movies
+        <div><img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/4ynQYtSEuU5hyipcGkfD6ncwtwz.jpg" alt=""></div>
+        <div>    <div class="glyphicon glyphicon-picture"></div>
+    </div>
+        <div>Content 3</div>
+        <div>Content 4</div>
+        <div>Content 5</div>
+        <div>Content 6</div>
+        <div>Content 7</div>
+        <div>Content 8</div>
+        <div>Content 9</div>
+        <div>Content 10</div>
+    </div>
+</div>
+
+<div id="main-content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!-- right_content.html -->
+<style>
+        #right-content div{
+        height: 20px;
+    }
+
+    #right-content>div>a{
+        text-decoration: none;
+        color: red;
+    }
+    #right-content>div>p{
+        text-decoration: none;
+        margin-top: 60px;
+        color: white;
+        font-size: 25px;
+    }
+    #right-content>div>a>div{
+        display: flex;
+        justify-content: left;
+    }
+</style>
+<div id="right-content">
+    <div class="container">
+        <p>Top rated movies</p>
+
+        {% for image in top_rated_images %}
+        <a href="{{ url_for('movie_page', idm=image[2]) }}" target="_blank">
+            <div style="display: flex; justify-content: flex-start; margin: 5px 5px;">
+                <div style="width: auto; margin: 0;"><img src="{{ image[0] }}" alt="Movie Image"> 
+                    
+                </div>
+                
+                <div style="margin-left:4px;">
+                    <div style="display: block;height: 20px;">
+                        {{image[1]}}
+                    </div>
+
+                    <div style="display: flex; ">
+                        <div style="display: inline;">
+                            <i class="fa fa-star"></i>
+                            {{image[3]}}
+            
+                        </div>
+                        <div>
+                            {{image[4]}}
+            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </a>
+        {% endfor %}
+    </div>
+</div>

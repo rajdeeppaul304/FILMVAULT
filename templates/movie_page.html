@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: gray;
+        }
+        #navbar{
+            width: 100%;
+            height: 15%;
+            background-color: black;
+            display: flex;
+            color: white;
+            
+        }
+
+        #navbar > img{
+            height: 100%;
+        }
+        #navbar > div{
+            display: flex;
+            justify-content:flex-end;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        #navbar > div > *{
+
+            margin: 0px 10px ;
+        }
+
+
+        #navbar > div > img{
+            height: 100%;
+        }
+
+
+
+    </style>
+    <script>
+            const genres = {{ genres | tojson | safe }};
+            const images_data = {{ images_data | tojson | safe }};
+            console.log(images_data)
+    </script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .checked{
+            color: orange;
+        }
+        #background{
+
+            position: relative;
+      width: 90%;
+      height: 60vh;
+      overflow: hidden;
+      padding: 20px 0px;
+      border-radius: 20px;
+        opacity: 0.8;
+        }
+    #background>img{
+        width: 100%;
+      height: auto;
+      display: block;
+      margin-top: -10%; /* Adjust this value to control the cropping */
+
+    }
+
+    .dark-overlay::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity by changing the last value (0.5 here) */
+      z-index: 1; /* Ensure the overlay is above the image */
+    }
+
+
+    #section1{
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        padding: 20px 0px;
+    }
+
+    #poster_path{
+        width: 270px;
+        max-height: 410px;
+        position: absolute;
+        top: 22%;
+        right: 70%;
+        z-index: 100;
+        overflow: hidden;
+        border-radius: 2em;
+    }
+    #poster_path > img{
+        width: 100%;
+    }
+    #movie_info{
+        width: 800px;
+        height: 50%;
+        position: absolute;
+        top: 22%;
+        right: 10%;
+        z-index: 101;
+        overflow: hidden;
+        border-radius: 2em;
+        /* background-color: red; */
+        color: white;
+    }
+
+    #title_movie{
+        font-size: 3em;
+        text-align: center;
+    }
+    #runtime{
+        text-align: left;
+    }
+    #release_date{
+        text-align: right;
+    }
+    #popularity{
+        text-align: right;
+    }
+    #vote-count{
+        text-align:right;
+    }
+
+    #vote-average{
+        font-size: 20px;
+    }
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <div id="navbar">
+        {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock navbar %}
+    
+    </div>
+
+    <div id="main-content">
+        <div id="section1">
+
+        <div id="background" class="dark-overlay">
+            <img id="backdrop_image" src="" onerror="handleImageError()" alt="Movie Image">
+        </div>
+
+        <div id="poster_path">
+            <img id="poster_image" src="" onerror="handlePosterError()" alt="">
+        </div>
+
+        <div id="movie_info">
+            <div class="container ">
+                <!-- First Row -->
+                <div class="row">
+                  <div class="col">
+                    <div id="title_movie" class="bg-transparent text-white p-3">
+                      First Row - 1 Column
+                    </div>
+                  </div>
+                </div>
+            
+                <!-- Second Row -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div id="runtime" class="bg-transparent text-white p-3">
+                      Second Row - 1st Column
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div id="release_date" class="bg-transparent text-white p-3">
+                      Second Row - 2nd Column
+                    </div>
+                  </div>
+                </div>
+            
+                <!-- Third Row -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div  class="bg-transparent text-white p-3">
+                      
+                      <!-- <div id="vote-average" class="row">Third Row - 1st Column - 1st row</div>
+                      <div  id="vote-count" class="row">Third Row - 1st Column - 2nd row</div> -->
+
+                      <span id="vote-average"></span> <span id="vote-count"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div id="popularity" class="bg-transparent text-white p-3">
+                      Third Row - 2nd Column
+                    </div>
+                  </div>
+                </div>
+            
+                <!-- Fourth Row -->
+                <div class="row">
+                  <div class="col">
+                    <div  class="bg-transparent text-white px-3 pt-2">
+                      Overview
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fifth Row -->
+              <div class="row">
+                <div class="col">
+                  <div id="overview" class="bg-transparent text-white pl-4">
+                    Fourth Row - 1 Column
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+    <!-- <script>
+        const imageElement = document.createElement('img')
+        imageElement.src = `https://image.tmdb.org/t/p/original${images_data.backdrop_path}`
+        const main_content = document.getElementById('main-content');
+        main_content.appendChild(imageElement)
+    </script> -->
+
+    <script>
+        function handleImageError() {
+    var fallbackImage = "https://image.tmdb.org/t/p/original/nMKdUUepR0i5zn0y1T4CsSB5chy.jpg";
+    document.getElementById("backdrop_image").src = fallbackImage;
+}
+
+function handlePosterError() {
+    var fallbackImage = "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg";
+    document.getElementById("poster_image").src = fallbackImage;
+}
+
+
+        function generateStarRating(contForStar, rating) {
+    const container = contForStar;
+    container.innerHTML = '';
+
+    // Ensure the rating is within the valid range (1 to 10)
+    rating = Math.max(1, Math.min(10, rating));
+
+    // Calculate the number of full stars, half star, and empty stars
+    const fullStars = Math.floor(rating / 2);
+    const hasHalfStar = rating % 2 !== 0;
+
+    // Create full stars
+    for (let i = 0; i < fullStars; i++) {
+    const star = document.createElement('span');
+    star.className = 'fa fa-star checked';
+    container.appendChild(star);
+    }
+
+    // Create half star if needed
+    if (hasHalfStar) {
+    const halfStar = document.createElement('span');
+    halfStar.className = 'fa fa-star-half-o checked';
+    container.appendChild(halfStar);
+    }
+
+    // Create empty stars
+    const emptyStars = 5 - Math.ceil(rating / 2);
+    for (let i = 0; i < emptyStars; i++) {
+    const star = document.createElement('span');
+    star.className = 'fa fa-star-o checked' ;
+    container.appendChild(star);
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+        const backdrop_image = document.getElementById("backdrop_image");
+        const poster_image = document.getElementById("poster_image");
+        const title_movie = document.getElementById("title_movie");
+        const runtime = document.getElementById("runtime");
+        const release_date = document.getElementById("release_date");
+        const vote_average = document.getElementById("vote-average");
+        const vote_count = document.getElementById("vote-count");
+        const popularity = document.getElementById("popularity");
+        const overview = document.getElementById("overview");
+
+        // Assuming images_data has a property named backdrop_path
+        backdrop_image.src = `https://image.tmdb.org/t/p/original${images_data.backdrop_path}`;
+        poster_image.src = `https://image.tmdb.org/t/p/original${images_data.poster_path}`;
+        title_movie.textContent = `${images_data.title}`;
+
+        runtime.textContent = `${ Math.floor(images_data.runtime / 60)}hr ${images_data.runtime % 60}min`;
+        release_date.textContent = `${images_data.release_date}`;
+        // vote_average.textContent = `${images_data.vote_average}`;
+        generateStarRating(vote_average, images_data.vote_average)
+        vote_count.textContent = `(${images_data.vote_count})`;
+        popularity.textContent = `${images_data.popularity}`;
+        overview.textContent = `${images_data.overview}`;
+
+
+
+
+        // Other DOM manipulations...
+    });
+
+
+    </script>
+
+
+    {% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

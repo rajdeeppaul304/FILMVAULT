@@ -1,0 +1,39 @@
+<div class="pagination">
+    {% if page_no > 1 %}
+        <a class="prev" href="{{ url_for('trending', timeperiod=timeperiod, page_no=page_no-1) }}">prev</a>
+    {% endif %}
+
+    {% if page_no > 5 %}
+        <a href="{{ url_for('trending', timeperiod=timeperiod, page_no=1) }}">1</a>
+        <span>...</span>
+    {% endif %}
+
+    {% for page in range(1, page_no+3) %}
+        {% if page_no - 2 <= page <= total_pages %}
+            {% if page == page_no %}
+                <span class="current-page">{{ page }}</span>
+            {% else %}
+                <a href="{{ url_for('trending', timeperiod=timeperiod, page_no=page) }}">{{ page }}</a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if page_no < total_pages - 4 %}
+        <span>...</span>
+        <a href="{{ url_for('trending', timeperiod=timeperiod, page_no=total_pages) }}">{{ total_pages }}</a>
+    {% endif %}
+
+    {% if page_no < total_pages %}
+        <a class="next" href="{{ url_for('trending', timeperiod=timeperiod, page_no=page_no+1) }}">next</a>
+    {% endif %}
+
+
+  <div class="jumpToPage">
+    <label for="jump-to-page">Jump to Page:</label>
+    <input type="number" class="jump-to-page" name="page_no" min="1" max="{{ total_pages }}" value="{{ page_no }}">
+    <button type="button" class="jump-button">Go</button>
+  </div>
+
+
+
+</div>

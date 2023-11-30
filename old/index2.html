@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background-color: black;
+      }
+      #navbar {
+        width: 100%;
+        height: 15%;
+        background-color: black;
+        display: flex;
+        color: white;
+      }
+
+      #navbar > img {
+        height: 100%;
+      }
+      #navbar > div {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+      }
+
+      #navbar > div > * {
+        margin: 0px 10px;
+      }
+
+      #navbar > div > img {
+        height: 100%;
+      }
+
+      #main {
+        width: 100%;
+        height: 85%;
+        /* background-color: aqua; */
+      }
+    </style>
+
+    <style>
+      #search {
+        margin: 0px 40%;
+        width: 30%;
+      }
+
+      #autocompleteResults > div {
+        display: flex;
+        background-color: white;
+        color: black;
+        width: 300px;
+        margin-top: 10px;
+      }
+
+      #autocompleteResults > div > img {
+        background-color: white;
+        color: black;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+
+      #autocompleteResults > div > p {
+        float: right;
+      }
+    </style>
+
+    <style>
+*{
+  box-sizing: border-box;
+}
+/* body{
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #130f40;
+  font-family: 'Lato' !important;
+} */
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.input-search{
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #22a6b3;
+  padding-right: 40px;
+  color:#fff;
+}
+.input-search::placeholder{
+  color:rgba(255,255,255,.5);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search{
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:#ffffff ;
+  background-color:transparent;
+  pointer-events: painted;  
+}
+.btn-search:focus ~ .input-search{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" />
+      <div>
+        <p>favorite</p>
+        <p>trending</p>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" />
+      </div>
+    </div>
+
+    <div id="main">
+      <!-- <div id="search">
+        <input type="text" id="movieSearch" placeholder="Enter movie title" />
+        <input id="search-button" type="button" value="search" />
+        <div id="autocompleteResults"></div>
+      </div> -->
+
+    <div id="search">
+      <div class="search-box" >
+        <button id="search-button" class="btn-search"><i class="fa fa-search"></i></button>
+        <input type="text" id="movieSearch" class="input-search" placeholder="Type to Search...">
+      </div>
+      <div id="autocompleteResults"></div>
+
+    </div>
+
+
+
+
+
+    </div>
+
+    
+    <script>
+      // script.js
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWRiZTA3OTE5NGI4NWYzYzk4MDkwN2Q2YzFjYjc2ZSIsInN1YiI6IjY1NjYyYTcyODlkOTdmMDBhYjE1ZWUzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HkrlRy6Ny7G9uwCzFuYrSW7V7GGEslMEL6W0TA6dyjE'
+        }
+      };
+
+      const searchButton = document.getElementById('search-button');
+      const searchInput = document.getElementById('movieSearch');
+      const autocompleteResults = document.getElementById('autocompleteResults');
+
+      searchInput.addEventListener('input', debounce(handleInput, 500));
+
+      searchButton.addEventListener('click', search_movie);
+
+
+      function handleInput() {
+          const query = searchInput.value.trim();
+
+          if (query.length === 0) {
+              autocompleteResults.innerHTML = '';
+              return;
+          }
+
+          const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+
+          fetch(url, options)
+              .then(response => response.json())
+              .then(data => displayResults(data.results))
+              .catch(error => console.error(error));
+      }
+
+      function displayResults(results) {
+          autocompleteResults.innerHTML = '';
+
+          // Limit the loop to 10 items or the length of results if it's less than 10
+          const limit = Math.min(results.length, 6);
+
+          for (let i = 0; i < limit; i++) {
+              const movie = results[i];
+
+              const listItem = document.createElement('div');
+                  const img_for_poster = document.createElement('img');
+                  const para_for_title = document.createElement('p');
+
+                  const backdrop_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.backdrop_path;
+                  const poster_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.poster_path;
+                  const error_image_url = `{{ url_for('static', filename='images/no_image.png') }}`;
+
+
+            
+                //   function loadImages() {
+                    img_for_poster.src = backdrop_path_url;
+                    img_for_poster.onerror = function() {
+                        // First image failed, try the second one
+                        img_for_poster.src = poster_path_url;
+                        img_for_poster.onerror = function() {
+                            // Both images failed, use the first default image
+                            img_for_poster.src = error_image_url;
+                        };
+                    };
+                // }
+
+// Load images on page load or when needed
+                // loadImages();
+
+            //   img_for_poster.src = backdrop_path_url
+
+            //   function handleImageError() {
+
+            //       img_for_poster.src = poster_path_url;
+
+            //   }
+
+
+
+            //   img_for_poster.onerror = handleImageError
+
+              para_for_title.textContent = movie.title;
+              listItem.addEventListener('click', () => {
+                  searchInput.value = movie.title;
+                  id_for_movie = movie.id;
+                  // search_input
+                  var url = `{{ url_for('movie_page', id='__id_for_movie__') }}`;
+                    // Replace '__page_no__' with the actual page number
+                    url = url.replace('__id_for_movie__', id_for_movie);
+                    window.open( url, '_blank');
+
+                  //   window.location.href = url
+
+                  autocompleteResults.innerHTML = '';
+              });
+
+              listItem.appendChild(img_for_poster)
+              listItem.appendChild(para_for_title)
+
+              autocompleteResults.appendChild(listItem);
+          }
+      }
+
+
+
+      function search_movie(){
+          const query = searchInput.value.trim();
+          var url = `{{ url_for('search', search_input='__search_input__', page_no=1) }}`;
+                    // Replace '__page_no__' with the actual page number
+                    url = url.replace('__search_input__', query);
+                    window.location.href = url;
+      }
+      // Utility function to debounce input event
+      function debounce(fn, delay) {
+          let timeoutId;
+          return function () {
+              clearTimeout(timeoutId);
+              timeoutId = setTimeout(() => {
+                  fn.apply(this, arguments);
+              }, delay);
+          };
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

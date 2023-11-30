@@ -1,0 +1,186 @@
+<style>
+    #images-grid-main>div>div>div>div{
+        overflow: hidden;
+        border-radius: 1em;
+        border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+        background-color: bisque;
+    }
+
+    #images-grid-main>div>div>div>div>div p{
+    margin: 5px 5px;    
+}
+
+#images-grid-main>div>div>div>div>div{
+    display: flex;
+    margin-left: 5px;    
+    justify-content: space-between;
+}
+
+
+#images-grid-main>div>div>div>a{
+        text-decoration: none;
+
+    }
+
+
+    #images-grid-main>div>div>div>a>p{
+        font-size: 22px;
+        padding: 0px 4px;
+        text-decoration: none;
+        color: black;
+        transition: font 0.3s ease-in-out;
+
+    }
+
+    #images-grid-main>div>div>div>a>p:hover{
+        font-size: 26px;
+        /* transform:scale(1.15); */
+    }
+
+
+   
+
+    #images-grid-main img{
+        border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  transition: transform 0.3s ease-in-out;
+
+    }
+
+    #images-grid-main img:hover{
+        border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+          transform:scale(1.2);
+
+    }
+
+
+
+</style>
+
+<div id="images-grid-main">
+
+
+
+  
+    <div class="container">
+        {% for chunk in images|batch(4) %}
+            <div class="row mb-4">
+                {% for image in chunk %}
+                    <div class="col-sm-3">
+                        <div>
+                            <a href="{{ url_for('movie_page', idm=image[2]) }}" target="_blank">
+                                <img src="{{ image[0] }}" alt="Movie Image">
+                            </a>
+                            <div>
+                                
+                                <!-- Append the movie's index or ID to the identifier -->
+                                <p class="vote-average" id="vote_average_{{ image[2] }}">{{ image[3] }}</p>
+                                <p class="date" >{{ image[4] }}</p>
+
+                            </div>
+                        </div>
+                        <a href="{{ url_for('movie_page', idm=image[2]) }}" target="_blank"><p>{{ image[1] }}</p></a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function generateStarRating(contForStar, rating) {
+    const container = contForStar;
+    container.innerHTML = '';
+
+    // Ensure the rating is within the valid range (1 to 10)
+    rating = Math.max(1, Math.min(10, rating));
+
+    // Calculate the number of full stars, half star, and empty stars
+    const fullStars = Math.floor(rating / 2);
+    const hasHalfStar = rating % 2 !== 0;
+
+    // Create full stars
+    for (let i = 0; i < fullStars; i++) {
+        const star = document.createElement('span');
+        star.className = 'fa fa-star checked';
+        container.appendChild(star);
+    }
+
+    // Create half star if needed
+    if (hasHalfStar) {
+        const halfStar = document.createElement('span');
+        halfStar.className = 'fa fa-star-half-o checked';
+        container.appendChild(halfStar);
+    }
+
+    // Create empty stars
+    const emptyStars = 5 - Math.ceil(rating / 2);
+    for (let i = 0; i < emptyStars; i++) {
+        const star = document.createElement('span');
+        star.className = 'fa fa-star-o checked';
+        container.appendChild(star);
+    }
+
+    // Adjust the spacing between stars
+    const allStars = container.querySelectorAll('span');
+    allStars.forEach(star => {
+        star.style.fontSize = '16px';  // Set the font size to the desired value
+        star.style.marginRight = '2px';  // Set the margin to control the spacing
+    });
+}
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Get all elements with class "vote-average"
+        const voteAverageElements = document.querySelectorAll(".vote-average");
+
+        // Loop through each element and generate star rating
+        voteAverageElements.forEach(function (element) {
+            const movieId = element.id.split("_")[1]; // Extract movie ID from the element ID
+            const rating = parseFloat(element.innerText); // Extract rating from the element text
+            generateStarRating(element, rating);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+    });
+</script>
