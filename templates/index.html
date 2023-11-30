@@ -318,8 +318,9 @@ input {
     <div id="navbar">
       <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" />
       <div>
-        <p>favorite</p>
-        <p>trending</p>
+        <!-- <p>favorite</p> -->
+        <a href="{{ url_for('trending', timeperiod='day', page_no=1) }}" style="text-decoration: none; color: white;margin: 0;"><p style="margin: 0;margin-bottom: 8px;">trending</p></a>
+        <!-- <p>trending</p> -->
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" />
       </div>
     </div>
