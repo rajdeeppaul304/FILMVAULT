@@ -1,2 +1,2 @@
 # FILMVAULT
-[FilmVault]((https://filmvault.adaptable.app/))
+[FilmVault](https://filmvault.adaptable.app)
