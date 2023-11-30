@@ -34,7 +34,7 @@ def funcForTopRated():
     response_top_rated = requests.get(top_rated_url, headers=headers_top_rated)
 
     data_top_rated = response_top_rated.json()
-    print(data_top_rated)
+    # print(data_top_rated)
     image_data = data_top_rated["results"]
 
 
@@ -57,7 +57,7 @@ def page_not_found(error):
 
 
 @app.route('/')
-def hello():
+def index():
     return render_template('index.html', message='Hello, World!',  genres=dict_genre['genres'])
 
 @app.route('/trending/<timeperiod>/<page_no>')
@@ -86,11 +86,11 @@ def trending(timeperiod, page_no):
     images = []
 
     for i in range(len(image_data)):
-        print(image_data[i]['poster_path'], image_data[i]['backdrop_path'])
+        # print(image_data[i]['poster_path'], image_data[i]['backdrop_path'])
 
         images.append(funcForBackdropPath(image_data[i]))
 
-    print(page_no)
+    # print(page_no)
     # images = []
     search_input = ""
     # total_pages = 10
@@ -101,7 +101,7 @@ def trending(timeperiod, page_no):
 @app.route('/search/<search_input>/<page_no>')
 def search(search_input, page_no):
     page_no = int(page_no)
-    print(f"{search_input}")
+    # print(f"{search_input}")
     tmdbQueryString =  f"https://api.themoviedb.org/3/search/movie?query={search_input}&api_key={API}&page={page_no}"
     response = requests.get(tmdbQueryString)
     data = response.json()
@@ -117,7 +117,7 @@ def search(search_input, page_no):
     images = []
 
     for i in range(len(image_data)):
-        print(image_data[i]['poster_path'], image_data[i]['backdrop_path'])
+        # print(image_data[i]['poster_path'], image_data[i]['backdrop_path'])
 
         images.append(funcForBackdropPath(image_data[i]))
 
@@ -131,20 +131,22 @@ def search(search_input, page_no):
 
 @app.route('/movie_page/<idm>')
 def movie_page(idm):
-    print("hehe",idm)
+    # print("hehe",idm)
     image_pre = "https://image.tmdb.org/t/p/original"
     tmdbQueryString = f"https://api.themoviedb.org/3/movie/{int(idm)}?api_key={API}"
     response = requests.get(tmdbQueryString)
     data = response.json()
-    print(data)
+    # print(data)
     if "success" in data.keys():
         if data['success'] == False:
             return render_template('404.html')
     else:
         images_data = funcForBackdropPath(data)
-        print(images_data, image_pre)
+        # print(images_data, image_pre)
         return render_template('movie_page.html', images_data=data, genres=dict_genre['genres'])
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+#  192.168.144.1
+# waitress-serve --host=192.168.144.1 --port=8080 main:app
