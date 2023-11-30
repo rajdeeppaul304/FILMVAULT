@@ -131,7 +131,7 @@
 
 
 
-<img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+<img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
 <div>
     <div id="search">
       <div style="display: flex; height: 30px;">
@@ -141,11 +141,25 @@
       </div>
         <div id="autocompleteResults"></div>
       </div>
-<p>favorite</p>
-<p>trending</p>
-<img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+      <a href="{{ url_for('trending', timeperiod='day', page_no=1) }}" style="text-decoration: none; color: white;margin: 0;"><p style="margin: 0;margin-bottom: 8px;">trending</p></a>
+      <img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+
 </div>
 <script>
+
+
+function handleClick(){
+  window.open("{{ url_for('index')}}");
+
+}
+
+
+
+
+
+
+
+
   const movieSearch = document.getElementById('movieSearch');
   const autocompleteResults = document.getElementById('autocompleteResults');
   
