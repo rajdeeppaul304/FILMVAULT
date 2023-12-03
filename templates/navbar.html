@@ -1,7 +1,93 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+          #navbar{
+            width: 100%;
+            height: 10%;
+            background-color: black;
+            display: flex;
+            color: white;
+            
+        }
+        #navbar > a{
+            height: 100%;
+        }
+
+        #navbar > a>img{
+            height: 100%;
+        }
+
+        #navbar > div{
+            display: flex;
+            justify-content:flex-start;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        #navbar > div:last-child {
+      align-self: flex-end;
+    }
+
+        #navbar > div > *{
+
+            margin: 0px 10px ;
+        }
+#navbar > div >a> img{
+            height: 100%;
+        }
+
+
+        #navbar > div > img{
+            height: 100%;
+        }
+
+
+</style>
+<style>
+  #navbar-mobile{
+    width: 100%;
+    height: 8%;
+    background-color: black;
+    display: flex;
+    color: white;
+    position: relative;
+    
+}
+#navbar-mobile > a{
+    height: 100%;
+}
+
+#navbar-mobile > a>img{
+    height: 100%;
+}
+
+#navbar-mobile > div{
+    display: flex;
+    /* justify-content:flex-end; */
+    align-items: center;
+    width: 100%;
+
+}
+
+#navbar-mobile > div > *{
+
+    /* margin: 0px 10px ; */
+}
+#navbar-mobile > div >a> img{
+    height: 100%;
+}
+
+
+#navbar-mobile > div > img{
+    height: 100%;
+}
+
+
+</style>
+<style>
   #search {
-      position:absolute;
+      /* position:absolute; */
       top: 5%;
       right: 30%;
       z-index: 1000;
@@ -9,9 +95,23 @@
     width: 30%;
     background-color: transparent;
   }
+
+  
+  #search {
+        margin: 0px auto;
+        width: 40%;
+        /* position: relative; */
+        /* left: auto; */
+        text-align: center;
+        justify-content: center;
+      }
+
+
   #movieSearch{
     width: 90%;
   }
+
+
   #autocompleteResults{
     width: 92%;
     background-color: #000;
@@ -37,19 +137,14 @@
   #autocompleteResults > div > p {
     float: right;
   }
-</style>
 
-  <style>
-          #search {
-        margin: 0px auto;
-        width: 40%;
-        /* position: relative; */
-        /* left: auto; */
-        text-align: center;
-        justify-content: center;
-      }
       #autocompleteResults{
         padding: 0 1.5em;
+        top: 10%;
+        position: absolute;
+        border-radius: 8px;
+        width: 32%;
+
       }
 
       #autocompleteResults > div {
@@ -113,17 +208,24 @@
 
 
 
+      #navbar-mobile{
+      display: none;
+    }
+    
 
 
 
-
-      #autocompleteResults {
-  display: none;
+       #autocompleteResults {
+  /* display: none; */
   /* Add other styles as needed */
-}
+} 
 
 
   @media (max-width:480px) {
+    #navbar{
+      display: none;
+    }
+    
       #navbar > div > img{
         display: none;
       }
@@ -139,46 +241,463 @@
         width: 70%;
         right: 15%;
       }
+
+
+      #navbar-mobile{
+      display: flex;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Style for the dropdown icon */
+    .dropdown-icon {
+      /* background-color: #3498db; */
+      color: #fff;
+      /* padding: 10px; */
+      border: none;
+      cursor: pointer;
+      display: inline-block; /* Ensure the icon takes only as much space as needed */
+    }
+
+    /* Style for the dropdown content (hidden by default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      top: 80%;
+    }
+
+    /* Style for the dropdown links */
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color on hover */
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    /* new0 */
+
+        .search-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .search-icon {
+      cursor: pointer;
+    }
+
+    .search-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #f9f9f9;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      width: 200px; /* Set the width as needed */
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+/* new */
+
+.search-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .search-icon {
+      cursor: pointer;
+    }
+
+    .search-dropdown {
+      display: none;
+      position: absolute;
+      /* top: 100%; */
+      left: 0;
+      background-color: #f9f9f9;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      width: 200px; 
+      margin: 0;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      margin: 0 !important;
+    }
+
+    #autocompleteResults-mobile{
+      /* height: 300px; */
+      width: 100%;
+    }
+
+
+    #autocompleteResults-mobile{
+    /* width: 92%; */
+    background-color: #000;
+    /* mar-right: 400px; */
   }
 
+  #autocompleteResults-mobile > div {
+    display: flex;
+    background-color: white;
+    color: black;
+    width: 100%;
+    
+    margin-top: 10px;
+  }
+
+  #autocompleteResults-mobile > div > img {
+    background-color: white;
+    color: black;
+    height: 65px;
+    margin-bottom: 10px;
+  }
+
+  #autocompleteResults-mobile > div > p {
+    float: right;
+  }
+
+      #autocompleteResults-mobile{
+
+        padding: 0 1.5em;
+        top: 100%;
+        position: absolute;
+        border-radius: 8px;
+        width: 94%;
+
+      }
+
+      #autocompleteResults-mobile > div {
+        display: flex;
+        background-color: bisque;
+        color: black;
+        width: 100%;
+        height: 5em;
+        margin-top: 10px;
+
+        white-space: nowrap; /* Prevent text from wrapping to the next line */
+  overflow: hidden; /* Hide the overflowed content */
+  text-overflow: ellipsis; /* Display an ellipsis (...) for the hidden text */
+
+        border-radius: 0.375em;
+        cursor: pointer;
+      }
+
+      #autocompleteResults-mobile > div > img {
+        background-color: bisque;
+        color: black;
+        height: 100%;
+        /* margin-bottom: 10px; */
+      }
+
+
+      #autocompleteResults-mobile > div >div {
+        padding-left: 2px;
+
+      }
+
+      #autocompleteResults-mobile > div >div>div {
+        display: flex;
+        /* background-color: red; */
+        padding-left: 4px;
+        padding-top: 2px;
+        font-size: 10px !important;
+
+
+      }
+
+      #autocompleteResults-mobile > div >div>div>div {
+        margin: 0 1px;
+        font-size: 10px !important;
+
+
+      }
+
+
+      #autocompleteResults-mobile > div >div>div>div * {
+        margin: 0 1px;
+        font-size: 10px !important;
+
+
+      }
+
+
+
+
+#autocompleteResults-mobile > div > div > div > div:not(:last-child)::after {
+  content: '|';
+  margin-left: 0.2em; 
+  margin-right: 0.2em; 
+
+  color: #000; /* Set the color of the bar */
+}
+
+
+
+      #autocompleteResults-mobile > div >div > p {
+        margin: 0;
+        text-align: left;
+        height: 50%;
+        font-size: 16px;
+      }
+
+#autocompleteResults-mobile > div:last-child{
+  margin-bottom: 10px;
+}
+
+
+  }
+
+
+
+  #left-content{
+    filter: none; 
+
+      transition: filter 0.3s ease-in-out; 
+    }
+
+    .no-effect {
+      /* filter: none !important; */
+    }
 
 
 
   </style>
 
+<div id="navbar">
+
+    <img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+    <div>
+        <div id="search">
+          <div style="display: flex; height: 30px;">
+
+            <input style="border: none; color: #fff; background-color: #000; border-bottom: 2px solid #fff; outline: none;" type="text" id="movieSearch" placeholder="Search Movie..." />
+
+            <p id="search-button" style="margin-left: 4px; margin-top: 3px;"><i class="fa fa-search" style="font-size:22px"></i></p>
+
+          </div>
+            <div id="autocompleteResults"></div>
+          </div>
+          
+          <!-- <img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt=""> -->
+
+    </div>
+    <div style="width: 10%;height:100%; justify-content: center;">
+      <a href="{{ url_for('trending', timeperiod='day', page_no=1) }}" style="text-decoration: none; color: white;margin: 0;"><p style="margin: 0;">Trending</p></a>
+    </div>
 
 
-<img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
-<div>
-    <div id="search">
-      <div style="display: flex; height: 30px;">
-        <input style="border: none; color: #fff; background-color: #000; border-bottom: 2px solid #fff; outline: none;" type="text" id="movieSearch" placeholder="Search Movie..." />
-        <!-- <input id="search-button" type="button" value="search" /> -->
-        <p id="search-button" style="margin-left: 4px; margin-top: 3px;"><i class="fa fa-search" style="font-size:22px"></i></p>
-      </div>
-        <div id="autocompleteResults"></div>
-      </div>
-      <a href="{{ url_for('trending', timeperiod='day', page_no=1) }}" style="text-decoration: none; color: white;margin: 0;"><p style="margin: 0;margin-bottom: 8px;">Trending</p></a>
-      <img onclick="handleClick()" style="cursor: pointer;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
 
 </div>
+
+
+<div id="navbar-mobile">
+
+  <div class="dropdown">
+    <i class="fa fa-bars dropdown-icon" onclick="toggleDropdown()"></i>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+    <img onclick="handleClick()" style="cursor: pointer; padding: 0; margin: 0; height: 30px;" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+
+  </div>
+  <div style="width: 10%;" >
+    <!-- <i class="fa fa-search"></i> -->
+    <div class="search-container" >
+      <i class="fa fa-search search-icon"  id="searchContainer"></i>
+
+    </div>
+
+  </div>
+
+  <div class="search-dropdown" id="searchDropdown" style="display: flex;">
+
+    <div style="display: flex; height: 30px;width: 100%; margin: 0 3%;">
+
+
+    <input id="movieSearch-mobile" type="text" class="search-input" placeholder="Search...">
+
+
+    <p id="search-button-mobile" style="margin-left: 4px; margin-top: 3px;"><i class="fa fa-search" style="font-size:13px; color: #000;"></i></p>
+
+    <div id="autocompleteResults-mobile"></div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+</div>
+
+
+</div>
+
 <script>
+    var dropdownContent = document.getElementById("myDropdown");
+
+    
+  document.addEventListener('DOMContentLoaded', function() {
+
+
+var searchContainer = document.getElementById("searchContainer");
+  var searchDropdown = document.getElementById("searchDropdown");
+  
+  searchDropdown.style.display = "none"; 
+  // grayscale(100%) blur(10px)
+
+
+    var Left_content = document.getElementById('left-content');
+    
+    // Left_content.classList.toggle('no-effect');
+
+
+
+    function toggleSearch() {
+    dropdownContent.style.display = "none";
+    searchDropdown.style.display = (searchDropdown.style.display === "flex") ? "none" : "flex";
+      if (searchDropdown.style.display === "none") {
+        Left_content.style.filter = 'none';
+
+      } else{
+        Left_content.style.filter = 'grayscale(100%) blur(10px)';
+
+      }
+
+
+
+  }
+
+  // Close the search dropdown if the user clicks outside of it
+  document.addEventListener("click", function(event) {
+
+
+    var isClickInsideSearchContainer = searchContainer.contains(event.target);
+    var isClickInsideSearchDropdown = searchDropdown.contains(event.target);
+
+    if (!isClickInsideSearchContainer && !isClickInsideSearchDropdown) {
+      searchDropdown.style.display = "none";
+      Left_content.style.filter = 'none';
+
+      // Left_content.classList.toggle('no-effect');
+
+    }
+  });
+
+  // Prevent the click event on the search container from propagating to the document
+  searchContainer.addEventListener("click", function(event) {
+    event.stopPropagation();
+    toggleSearch();
+  });
+
+
+
+
+  });
+
+  // Toggle the visibility of the search input
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function toggleDropdown() {
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropdown-icon')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.style.display === "block") {
+          openDropdown.style.display = "none";
+        }
+      }
+    }
+  }
 
 
 function handleClick(){
   window.open("{{ url_for('index')}}");
 
 }
+</script>
 
 
-  const movieSearch = document.getElementById('movieSearch');
+<script src="{{url_for('static', filename='scripts/script.js')}}"></script>
+
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+
   const autocompleteResults = document.getElementById('autocompleteResults');
+  const searchButton = document.getElementById('search-button');
+  const searchInput = document.getElementById('movieSearch');
+
+  const autocompleteResults_mobile = document.getElementById('autocompleteResults-mobile');
+  const searchButton_mobile = document.getElementById('search-button-mobile');
+  const searchInput_mobile  = document.getElementById('movieSearch-mobile');
+
+
   
-  movieSearch.addEventListener("keydown", function(event) {
+  const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWRiZTA3OTE5NGI4NWYzYzk4MDkwN2Q2YzFjYjc2ZSIsInN1YiI6IjY1NjYyYTcyODlkOTdmMDBhYjE1ZWUzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HkrlRy6Ny7G9uwCzFuYrSW7V7GGEslMEL6W0TA6dyjE'
+      }
+    };
+
+
+
+    searchInput.addEventListener("keydown", function(event) {
     // Check if the pressed key is Enter (key code 13)
     if (event.keyCode === 13) {
         // Get the value entered in the input field
-        const query = movieSearch.value.trim();
+        const query = searchInput.value.trim();
           var url = `{{ url_for('search', search_input='__search_input__', page_no=1) }}`;
                     // Replace '__page_no__' with the actual page number
                     url = url.replace('__search_input__', query);
@@ -189,200 +708,122 @@ function handleClick(){
 });
 
 
+    searchInput.addEventListener('input', debounce(() => handleInput(searchInput, autocompleteResults), 500));
+
+    searchInput_mobile.addEventListener('input', debounce(() => handleInput(searchInput_mobile, autocompleteResults_mobile), 500));
+
+
+
+    searchButton.addEventListener('click', function() {
+    searchMovie(searchInput);
+});
+
+searchButton_mobile.addEventListener('click', function() {
+    searchMovie(searchInput_mobile);
+});
 
 
 
 
+    function handleInput(inputElem, resultsElem) {
+    const query = inputElem.value.trim();
+
+    if (query.length === 0) {
+        resultsElem.innerHTML = '';
+        return;
+    }
+
+    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => displayResults(data.results, resultsElem))
+        .catch(error => console.error(error));
+}
 
 
 
-  movieSearch.addEventListener('focus', () => {
-    autocompleteResults.style.transition = 'opacity 0.3s ease-in-out';
-    autocompleteResults.style.opacity = '1'; // Set opacity to fully visible
-    autocompleteResults.style.display = 'block';
-  });
-  
-  movieSearch.addEventListener('blur', () => {
-    autocompleteResults.style.opacity = '0'; // Set opacity to fully transparent
-    setTimeout(() => {
-      autocompleteResults.style.display = 'none';
-    }, 300); // Adjust the timeout to match the transition duration
-  });
-  
-  </script>
-  <script src="{{url_for('static', filename='scripts/script.js')}}"></script>
+function displayResults(results, targetElement) {
+    targetElement.innerHTML = '';
+    console.log(targetElement)
+    // Limit the loop to 10 items or the length of results if it's less than 10
+    const limit = Math.min(results.length, 5);
 
+    for (let i = 0; i < limit; i++) {
 
-<script>
-    // script.js
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWRiZTA3OTE5NGI4NWYzYzk4MDkwN2Q2YzFjYjc2ZSIsInN1YiI6IjY1NjYyYTcyODlkOTdmMDBhYjE1ZWUzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HkrlRy6Ny7G9uwCzFuYrSW7V7GGEslMEL6W0TA6dyjE'
-      }
-    };
+        const movie = results[i];
 
-    const searchButton = document.getElementById('search-button');
-    const searchInput = document.getElementById('movieSearch');
-    // const autocompleteResults = document.getElementById('autocompleteResults');
+        const listItem = document.createElement('div');
+        const img_for_poster = document.createElement('img');
+        const div_beside_image = document.createElement('div');
+        const para_for_title = document.createElement('p');
+        const info_movie = document.createElement('div');
+        const info_movie_rating = document.createElement('div');
+        const info_movie_genre = document.createElement('div');
+        const info_movie_releasedate = document.createElement('div');
 
-    searchInput.addEventListener('input', debounce(handleInput, 500));
+        const backdrop_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.backdrop_path;
+        const poster_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.poster_path;
+        const error_image_url = `{{ url_for('static', filename='images/no_image.png') }}`;
 
-    searchButton.addEventListener('click', search_movie);
+        img_for_poster.src = backdrop_path_url;
+        img_for_poster.onerror = function() {
+            img_for_poster.src = poster_path_url;
+            img_for_poster.onerror = function() {
+                img_for_poster.src = error_image_url;
+            };
+        };
 
-
-              // }
-
-// Load images on page load or when needed
-              // loadImages();
-
-          //   img_for_poster.src = backdrop_path_url
-
-          //   function handleImageError() {
-
-          //       img_for_poster.src = poster_path_url;
-
-          //   }
-
-
-
-          //   img_for_poster.onerror = handleImageError
-
-      // script.js
-
-
-      searchInput.addEventListener('input', debounce(handleInput, 500));
-
-      searchButton.addEventListener('click', search_movie);
-
-
-
-
-      function handleInput() {
-          const query = searchInput.value.trim();
-
-          if (query.length === 0) {
-              autocompleteResults.innerHTML = '';
-              return;
-          }
-
-          const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
-
-          fetch(url, options)
-              .then(response => response.json())
-              .then(data => displayResults(data.results))
-              .catch(error => console.error(error));
-      }
-
-      function displayResults(results) {
-          autocompleteResults.innerHTML = '';
-
-          // Limit the loop to 10 items or the length of results if it's less than 10
-          const limit = Math.min(results.length, 5);
-
-          for (let i = 0; i < limit; i++) {
-              const movie = results[i];
-
-              const listItem = document.createElement('div');
-                  const img_for_poster = document.createElement('img');
-                  const div_beside_image = document.createElement('div');
-                    const para_for_title = document.createElement('p');
-                    const info_movie = document.createElement('div');
-                        const info_movie_rating = document.createElement('div');
-                        const info_movie_genre = document.createElement('div');
-                        const info_movie_releasedate = document.createElement('div');
-
-                  const backdrop_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.backdrop_path;
-                  const poster_path_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + movie.poster_path;
-                  const error_image_url = `{{ url_for('static', filename='images/no_image.png') }}`;
-
-
-            
-                //   function loadImages() {
-                    img_for_poster.src = backdrop_path_url;
-                    img_for_poster.onerror = function() {
-                        // First image failed, try the second one
-                        img_for_poster.src = poster_path_url;
-                        img_for_poster.onerror = function() {
-                            // Both images failed, use the first default image
-                            img_for_poster.src = error_image_url;
-                        };
-                    };
-                // }
-
-// Load images on page load or when needed
-                // loadImages();
-
-            //   img_for_poster.src = backdrop_path_url
-
-            //   function handleImageError() {
-
-            //       img_for_poster.src = poster_path_url;
-
-            //   }
-
-
-
-            //   img_for_poster.onerror = handleImageError
-            function getFirstThreeGenres(genreIds, genreDict) {
-            const firstThreeGenreIds = genreIds.slice(0, 3); // Get the first three genre IDs
+        function getFirstThreeGenres(genreIds, genreDict) {
+            const firstThreeGenreIds = genreIds.slice(0, 3);
             const firstThreeGenres = firstThreeGenreIds.map(id => {
                 const genre = genreDict.find(item => item.id === id);
                 return genre ? genre.name : '';
             });
             return firstThreeGenres.join(', ');
-            }
+        }
 
-                console.log(movie)
-            // Display the runtime in the desired format
-            // info_movie_runtime.textContent = `${hours}h ${minutes}m`;
+        para_for_title.textContent = movie.title;
+        info_movie_releasedate.textContent = movie.release_date;
+        info_movie_genre.textContent = getFirstThreeGenres(movie.genre_ids, genres);
 
-              para_for_title.textContent = movie.title;
-              info_movie_releasedate.textContent = movie.release_date ;
-              info_movie_genre.textContent = getFirstThreeGenres(movie.genre_ids, genres);
+        generateStarRating(info_movie_rating, movie.vote_average);
 
-              generateStarRating(info_movie_rating, movie.vote_average);
+        listItem.addEventListener('click', () => {
+            searchInput.value = movie.title;
+            id_for_movie = movie.id;
+            var url = `{{ url_for('movie_page', idm='__id_for_movie__') }}`;
+            url = url.replace('__id_for_movie__', id_for_movie);
+            window.open(url, '_blank');
+            targetElement.innerHTML = '';
+        });
 
-              listItem.addEventListener('click', () => {
-                  searchInput.value = movie.title;
-                  id_for_movie = movie.id;
-                  // search_input
-                  var url = `{{ url_for('movie_page', idm='__id_for_movie__') }}`;
-                    // Replace '__page_no__' with the actual page number
-                    url = url.replace('__id_for_movie__', id_for_movie);
-                    window.open( url, '_blank');
+        info_movie.appendChild(info_movie_rating);
+        info_movie.appendChild(info_movie_releasedate);
+        info_movie.appendChild(info_movie_genre);
 
-                  //   window.location.href = url
+        div_beside_image.appendChild(para_for_title);
+        div_beside_image.appendChild(info_movie);
 
-                  autocompleteResults.innerHTML = '';
-              });
+        listItem.appendChild(img_for_poster);
+        listItem.appendChild(div_beside_image);
 
-              info_movie.appendChild(info_movie_rating)
-              info_movie.appendChild(info_movie_releasedate)
-              info_movie.appendChild(info_movie_genre)
+        targetElement.appendChild(listItem);
+        console.log(targetElement.innerHTML)
 
-
-              div_beside_image.appendChild(para_for_title)
-              div_beside_image.appendChild(info_movie)
-
-              listItem.appendChild(img_for_poster)
-              listItem.appendChild(div_beside_image)
-              
-
-              autocompleteResults.appendChild(listItem);
-          }
-      }
+    }
+}
 
 
-
-      function search_movie(){
-          const query = searchInput.value.trim();
+    
+      function searchMovie(inputElem) {
+          const query = inputElem.value.trim();
           var url = `{{ url_for('search', search_input='__search_input__', page_no=1) }}`;
-                    // Replace '__page_no__' with the actual page number
-                    url = url.replace('__search_input__', query);
-                    window.location.href = url;
+          url = url.replace('__search_input__', query);
+          window.location.href = url;
       }
+ 
+ 
       // Utility function to debounce input event
       function debounce(fn, delay) {
           let timeoutId;
@@ -393,4 +834,7 @@ function handleClick(){
               }, delay);
           };
       }
+    
+    
+    });
     </script>

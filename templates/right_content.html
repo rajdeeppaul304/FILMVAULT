@@ -4,10 +4,26 @@
         height: 20px;
     }
 
+    
     #right-content>div>a{
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+    }
+
+    #right-content>div>a>div>div>div>div{
         text-decoration: none;
         color: red;
     }
+
+    #right-content>div>a>div>div>div :last-child{
+        text-decoration: none;
+        color: black;
+        font-weight: 400;
+    }
+
+
+
     #right-content>div>p{
         text-decoration: none;
         margin-top: 60px;
@@ -37,7 +53,7 @@
 
                     <div style="display: flex; ">
                         <div style="display: inline;">
-                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star" style="color: red;"></i>
                             {{image[3]}}
             
                         </div>

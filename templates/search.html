@@ -31,35 +31,6 @@
         display: inline;
       }
 
-        #navbar{
-            width: 100%;
-            height: 15%;
-            background-color: black;
-            display: flex;
-            color: white;
-            
-        }
-
-        #navbar > img{
-            height: 100%;
-        }
-        #navbar > div{
-            display: flex;
-            justify-content:flex-end;
-            align-items: center;
-            width: 100%;
-
-        }
-
-        #navbar > div > *{
-
-            margin: 0px 10px ;
-        }
-
-
-        #navbar > div > img{
-            height: 100%;
-        }
 
 
 
@@ -263,14 +234,11 @@ text-align: center;
 </head>
 <body>
 
-    <div id="navbar">
         {% block navbar %}
         {% include 'navbar.html' %}
     {% endblock navbar %}
     
-    </div>
 
-    </div>
 
     <div id="main">
         <div id="left-content">
